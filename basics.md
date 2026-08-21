@@ -71,3 +71,19 @@ void foo(int a, int b){
         0x011 ...
         ```
     - r15 = PC (Program counter) to keep track of instruction being executed
+
+
+### Function call
+
+- Never touch r13, r14, r15
+- r0-r3 and r12 are asumed to get destroyed during the call
+- Only need to push r4-r11 **(IF used in the function)**
+
+| Register | Role                    | Who preserves it?                |
+| -------- | ----------------------- | -------------------------------- |
+| `r0-r3`  | args / return / scratch | **Caller**                       |
+| `r4-r11` | local / preserved       | **Callee**                       |
+| `r12`    | scratch (`IP`)          | **Caller**                       |
+| `r13`    | SP                      | Must maintain                    |
+| `r14`    | LR                      | Depends / callee saves if needed |
+| `r15`    | PC                      | Hardware/control flow            |
